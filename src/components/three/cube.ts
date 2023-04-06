@@ -57,13 +57,12 @@ export function Cube(canvas: HTMLCanvasElement) {
   const renderPass = new RenderPass(scene, camera);
   composer.addPass(renderPass);
 
-// camera controls
+  // camera controls
   const controls = new OrbitControls(camera, canvas);
   controls.enableDamping = true;
   controls.dampingFactor = 0.1;
 
-
-// transform controls
+  // transform controls
   let isObjectBeingControlled = false;
 
   const transformControls = new TransformControls(camera, canvas);
@@ -81,12 +80,11 @@ export function Cube(canvas: HTMLCanvasElement) {
       transformControls.detach();
     }
   }
-  
 
   const pixelationShader = {
     uniforms: {
       tDiffuse: { value: null },
-      resolution: { value: new THREE.Vector2(300, 300) },
+      resolution: { value: new THREE.Vector2(500, 500) },
     },
     vertexShader: `
     varying vec2 vUv;
@@ -113,10 +111,10 @@ export function Cube(canvas: HTMLCanvasElement) {
   function onWindowResize() {
     const container = canvas.parentElement;
     if (!container) return;
-  
+
     const width = container.clientWidth;
     const height = container.clientHeight;
-  
+
     camera.aspect = width / height;
     camera.updateProjectionMatrix();
     renderer.setSize(width, height);
@@ -140,26 +138,22 @@ export function Cube(canvas: HTMLCanvasElement) {
       select(null);
     }
   });
-  
+
   function animate() {
     requestAnimationFrame(animate);
     controls.update();
 
-  
     if (!isObjectBeingControlled) {
-      cube.rotation.x += 0.01;
-      cube.rotation.y += 0.01;
-  
-      sphere.rotation.x += 0.01;
-      sphere.rotation.y += 0.02;
-  
-      torus.rotation.x += 0.02;
-      torus.rotation.y += 0.01;
+      // cube.rotation.x += 0.01;
+      // cube.rotation.y += 0.01;
+      // sphere.rotation.x += 0.01;
+      // sphere.rotation.y += 0.02;
+      // torus.rotation.x += 0.02;
+      // torus.rotation.y += 0.01;
     }
-  
+
     render();
   }
-  
 
   function render() {
     composer.render();
@@ -169,7 +163,7 @@ export function Cube(canvas: HTMLCanvasElement) {
 
   return {
     onWindowResize: onWindowResize,
-    enableControls: () => controls.enabled = true,
-    disableControls: () => controls.enabled = false,
+    enableControls: () => (controls.enabled = true),
+    disableControls: () => (controls.enabled = false),
   };
 }
