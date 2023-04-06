@@ -1,0 +1,16 @@
+.object-explorer {
+    height: 100%;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+  }
+  
+  .object-explorer-buttons {
+    padding: 10px;
+  }
+  
+  .inspector {
+    flex-grow: 1;
+  }
+  

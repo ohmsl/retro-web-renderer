@@ -1,8 +1,12 @@
 import { useEffect, useRef } from "react";
-import { Cube } from "./three/cube";
+import { Cube } from "./three/scene";
 import { debounce } from "../utils/debounce";
 
-function Scene() {
+interface SceneProps {
+  onAddShape: (shapeType: string) => void;
+}
+
+const Scene: React.FC<SceneProps> = ({ onAddShape }) => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
@@ -47,6 +51,6 @@ function Scene() {
       <canvas ref={canvasRef} style={{ width: "100%", height: "100%" }} />
     </div>
   );
-}
+};
 
 export default Scene;

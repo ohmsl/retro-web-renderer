@@ -5,7 +5,9 @@ import { EffectComposer } from "three/examples/jsm/postprocessing/EffectComposer
 import { RenderPass } from "three/examples/jsm/postprocessing/RenderPass";
 import { ShaderPass } from "three/examples/jsm/postprocessing/ShaderPass";
 
-export function Cube(canvas: HTMLCanvasElement) {
+type ShapeType = "cube" | "sphere" | "torus";
+
+export function Scene(canvas: HTMLCanvasElement) {
   const scene = new THREE.Scene();
 
   const camera = new THREE.PerspectiveCamera(
@@ -138,6 +140,26 @@ export function Cube(canvas: HTMLCanvasElement) {
       select(null);
     }
   });
+
+
+  function addShape(shapeType: ShapeType) {
+    const geometry =
+      shapeType === "cube"
+        ? new THREE.BoxGeometry()
+        : shapeType === "sphere"
+        ? new THREE.SphereGeometry(0.5, 32, 32)
+        : new THREE.TorusGeometry(0.3, 0.1, 16, 100);
+    const material = new THREE.MeshStandardMaterial({
+      color: 0x00ff00,
+      roughness: 0.5,
+      metalness: 0,
+    });
+  
+    const shape = new THREE.Mesh(geometry, material);
+    scene.add(shape);
+  }
+
+
 
   function animate() {
     requestAnimationFrame(animate);
